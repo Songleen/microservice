@@ -1,0 +1,39 @@
+server:
+  port: 8001
+
+mybatis:
+  config-location: classpath:mybatis/mybatiscfg.xml         # mybatis配置文件的路径
+  type-aliases-package: com.atguigu.springcloud.entities    # 所有entity别名所在包
+  mapper-locations: classpath:mybatis/mapper/**/*.xml       # mapper映射文件
+
+spring:
+  application:
+    name: microservicecloud-dept                            # 这个名字就是对外暴露的微服务名字，很重要的,Eureka会自动转化为大写
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver              # mysql驱动包
+    url: jdbc:mysql://localhost:3306/cloudDB01              # 数据库名称
+    username: root
+    password: rootlin
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200                                  # 等待获取连接的最大超时时间
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+       # defaultZone: http://localhost:7001/eureka     # 单机版
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/ #集群版
+  instance:
+    instance-id: lisonglin      #此实例注册到eureka服务端的唯一的实例ID
+    prefer-ip-address: true     #访问路径可以显示IP地址
+    lease-renewal-interval-in-seconds: 30 #eureka客户端多久发送心跳给eureka服务器，表明自己还活着，默认是30s,单位是秒
+    lease-expiration-duration-in-seconds: 90 #eureka服务器在接收到实例的最后一次心跳后，需要多久才可以将该实例删除，默认90秒，单位秒
+
+info:     #追加对这个微服务的描述，这样在Eureka页面点击链接时，就会显示这里的内容，而非空白错误页；
+  app.name: atguigu-microservicecloud
+  company.name: www.atguigu.com
+  build.artifactId: ${project.artifactId}  #这里没有写死，相当于引入
+  build.version: ${project.version}
