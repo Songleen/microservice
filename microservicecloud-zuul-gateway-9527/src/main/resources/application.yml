@@ -5,6 +5,7 @@ spring:
   application:
     name: microservicecloud-zuul-gateway
 
+# 配置eureka,因为网管服务依然会被注册到注册中心里面
 eureka:
   client:
     service-url:
@@ -13,13 +14,16 @@ eureka:
       instance-id: gateway-9527.com
       prefer-ip-address: true
 
+# 网管的配置
 zuul:
-  routes:
-    mydept.serviceId: microservicecloud-dept
-    mydept.path: /mydept/**
-  prefix: /atguigu
-  ignored-services: "*"
+  routes: #下面就是进行路由映射
+    mydept.serviceId: microservicecloud-dept  #serviceId就是微服务的id
+    mydept.path: /mydept/**       #path就是映射到哪个路径上，也就是将microservicecloud-dept映射成/mydept/这个路径
+  prefix: /atguigu  # 设置统一共同前缀，也就是访问路径变成了 /atguigu/mydept/**
+  ignored-services: "*"   # 忽略真实服务名，防止用原服务名能访问到服务，单个可以写具体的，多个就写'*'
 
+
+# 应用的介绍信息，可写可不写
 info:
   app.name: atguigu-microcloud
   company.name: www.atguigu.com

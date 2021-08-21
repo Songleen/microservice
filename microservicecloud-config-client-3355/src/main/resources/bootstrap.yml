@@ -1,7 +1,7 @@
 spring:
   cloud:
     config:
-      name: microservicecloud-config-client  #需要从github上读取的资源名称，注意没有yml后缀名
-      profile: test  #本次访问的配置项
-      label: master
+      name: microservicecloud-config-client  #需要从github上读取的资源名称,也就是那个配置文件，注意没有yml后缀名
+      profile: test  #本次访问配置文件中的配置项（注意，这里就是你获取到的配置文件的部分）
+      label: master  #github的master分支
       uri: http://config-3344.com:3344  #本微服务启动后先去找3344号服务，通过SpringCloudConfig获取GitHub的服务地址

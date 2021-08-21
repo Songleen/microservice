@@ -2,6 +2,7 @@ package com.atguigu.springcloud.controller;
 
 import com.atguigu.springcloud.entity.Dept;
 import com.atguigu.springcloud.service.DeptClientService;
+import com.atguigu.springcloud.service.DeptTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,9 @@ public class DeptController_Consumer {
     @Autowired
     private DeptClientService service;
 
+    @Autowired
+    private DeptTestService testService;
+
     @RequestMapping(value = "/consumer/dept/add")
     public boolean add(Dept dept) {
         return service.add(dept);
@@ -32,7 +36,17 @@ public class DeptController_Consumer {
 
     @RequestMapping(value = "/consumer/dept/list")
     public List<Dept> list() {
-        return service.list();
+        System.out.println("请求过来了");
+        List<Dept> list = service.list();
+        System.out.println(list);
+        return list;
+    }
+
+    @RequestMapping(value="/consumer/dept/list/test")
+    public List<Dept> getList(){
+        System.out.println("test的请求过来了");
+        List<Dept> depts = testService.list();
+        return depts;
     }
 
 }

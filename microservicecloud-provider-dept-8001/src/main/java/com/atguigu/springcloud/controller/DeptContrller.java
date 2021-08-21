@@ -2,11 +2,13 @@ package com.atguigu.springcloud.controller;
 
 import com.atguigu.springcloud.entity.Dept;
 import com.atguigu.springcloud.service.DeptService;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,8 +35,13 @@ public class DeptContrller {
 
     @RequestMapping(value = "/dept/list", method = RequestMethod.GET)
     public List<Dept> list() {
-        List<Dept> list = service.list();
-        return list;
+        System.out.println("请求过来了………………");
+        Dept d = new Dept();
+        d.setDname("大兄弟1");
+        d.setDeptno(001L);
+        List<Dept> depts = new ArrayList<>();
+        depts.add(d);
+        return depts;
     }
 
     //服务发现

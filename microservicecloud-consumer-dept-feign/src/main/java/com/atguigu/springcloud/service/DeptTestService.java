@@ -1,6 +1,10 @@
 package com.atguigu.springcloud.service;
 
+import com.atguigu.springcloud.entity.Dept;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @ClassName microservicecloud
@@ -14,4 +18,6 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 // @FeignClient(url = "www")
 public interface DeptTestService{
 
+     @RequestMapping(value="/dept/list")
+     List<Dept> list();
 }

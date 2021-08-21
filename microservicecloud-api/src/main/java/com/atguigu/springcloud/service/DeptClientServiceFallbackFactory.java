@@ -11,7 +11,7 @@ import java.util.List;
  * @Author Songleen
  * @Date 2019/07/10/9:46
  */
-@Component
+// @Component
 public class DeptClientServiceFallbackFactory implements FallbackFactory<DeptClientService> {
     //通过这个接口将DeptClientService接口中的每一个方法的熔断机制统一放在此处处理，实现与Controller类的解耦
     @Override
